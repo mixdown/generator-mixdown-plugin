@@ -1,7 +1,6 @@
 # generator-mixdown-plugin [![Build Status](https://secure.travis-ci.org/mixdown/generator-mixdown-plugin.png?branch=master)](https://travis-ci.org/mixdown/generator-mixdown-plugin)
 
-A generator for [Yeoman](http://yeoman.io).
-
+Mixdown plugin generator for [Yeoman](http://yeoman.io).
 
 ## Getting Started
 
