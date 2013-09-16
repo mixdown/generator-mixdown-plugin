@@ -23,28 +23,26 @@ MixdownPluginGenerator.prototype.askFor = function askFor() {
   console.log(this.yeoman);
 
   var prompts = [{
-    type: 'confirm',
-    name: 'someOption',
-    message: 'Would you like to enable this option?',
-    default: true
+    name: 'pluginName',
+    message: 'What would you like to name this plugin?'
   }];
 
   this.prompt(prompts, function (props) {
-    this.someOption = props.someOption;
+    this.pluginName = props.pluginName;
 
     cb();
   }.bind(this));
 };
 
 MixdownPluginGenerator.prototype.app = function app() {
-  this.mkdir('app');
-  this.mkdir('app/templates');
-
-  this.copy('_package.json', 'package.json');
+  var packageJSON = require(path.join(__dirname, '../app/templates/_package.json'));
+  packageJSON.name = this.pluginName;
+  packageJSON.description = this.pluginDescription;
+  this.write('package.json', JSON.stringify(packageJSON, null, 2));
   this.copy('_index.js', 'index.js');
 };
 
 MixdownPluginGenerator.prototype.projectfiles = function projectfiles() {
-  this.copy('editorconfig', '.editorconfig');
-  this.copy('jshintrc', '.jshintrc');
+  // this.copy('editorconfig', '.editorconfig');
+  // this.copy('jshintrc', '.jshintrc');
 };
