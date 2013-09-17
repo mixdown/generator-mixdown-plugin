@@ -25,10 +25,15 @@ MixdownPluginGenerator.prototype.askFor = function askFor() {
   var prompts = [{
     name: 'pluginName',
     message: 'What would you like to name this plugin?'
+  },
+  {
+    name: 'pluginDescription',
+    message: 'Description [optional]'
   }];
 
   this.prompt(prompts, function (props) {
     this.pluginName = props.pluginName;
+    this.pluginDescription = props.pluginDescription;
 
     cb();
   }.bind(this));
