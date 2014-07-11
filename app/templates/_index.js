@@ -1,40 +1,31 @@
-var fn1 = function() {
-  throw new Error("TODO: implement fn1");
-};
+var BasePlugin = require('mixdown-app').Plugin;
 
-var fn2 = function() {
-  throw new Error("TODO: implement fn2");
-}
+// Create a new plugin from the base plugin class.
+// this._options is the options hash that was passed on init.
+var HelloPlugin = BasePlugin.extend({
 
-// Plugin for mixdown exposing the interfaces.
-var YourNewPlugin = function(namespace) {
+  // Any function that does not start with _ will be attached.
+  // do not use init() as it is reserved in the Resign Simple Inheritance pattern
+  // http://ejohn.org/blog/simple-javascript-inheritance/
+  hello: function() {
 
-  if (!this instanceof YourNewPlugin) {
-    throw new Error('Please instantiate using keyword "new."  Broadway expects this.');
-  }
+    // If you want to access a parent class's hello() function, then it is available as this._super();
+    // http://ejohn.org/blog/simple-javascript-inheritance/
 
-  namespace = namespace || 'undefined';
+    this.count++;
+    return 'Hello ' + this._options.name;
+  },
 
-  this.attach = function(options) {
-    this[namespace] = {
-      fn1: fn1,
-      fn2: fn2
-    };
-  };
+  // Scalar values are wrapped in an accessor function on the plugin interface.
+  // To get count, use .count()
+  // to set count, use .count(new_val)
+  count: 0,
 
-  // Initialize the plugin here.
-  this.init = function(done) {
+  // _setup is part of the mixdown plugin interface.  Use this to initialize the plugin.
+  // This is typically used to asynchronously init a db or api that is part of the plugin interface.
+  _setup: function(done) {
     done();
-  };
+  }
+});
 
-};
-
-// Export the library functions and the plugin functions.  
-// This pattern works for a utility library like https://github.com/vast-eng/mixdown-geotools
-// In some cases, you might want to export only the plugin like https://github.com/vast-eng/broadway-handlebars/blob/master/index.js
-// In other cases, you might want to export library and the plugin separately.  This is done here - https://github.com/mixdown/oauth/blob/master/index.js
-module.exports = {
-  YourNewPlugin: YourNewPlugin,
-  fn1: fn1,
-  fn2: fn2
-};
+module.exports = HelloPlugin;

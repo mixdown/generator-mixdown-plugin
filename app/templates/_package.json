@@ -3,13 +3,12 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo Test not defined."
+    "test": "mocha -R spec -u tdd test/tests/*.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "mixdown-app": "https://github.com/mixdown/mixdown-app/tarball/resig-extend"
+  },
   "devDependencies": {
-    "mocha": "~1.12.0",
-    "tape": "~1.1.0",
-    "tap": "~0.4.4",
-    "broadway": "~0.2.7"
+    "mocha": "~1.20.1"
   }
 }

@@ -7,8 +7,10 @@ var yeoman = require('yeoman-generator');
 var MixdownPluginGenerator = module.exports = function MixdownPluginGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
-  this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'] });
+  this.on('end', function() {
+    this.installDependencies({
+      skipInstall: options['skip-install']
+    });
   });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
@@ -24,14 +26,14 @@ MixdownPluginGenerator.prototype.askFor = function askFor() {
 
   var prompts = [{
     name: 'pluginName',
-    message: 'What would you like to name this plugin?'
-  },
-  {
+    message: 'What would you like to name this plugin?',
+    default: this._.last(process.cwd().split(path.sep))
+  }, {
     name: 'pluginDescription',
     message: 'Description [optional]'
   }];
 
-  this.prompt(prompts, function (props) {
+  this.prompt(prompts, function(props) {
     this.pluginName = props.pluginName;
     this.pluginDescription = props.pluginDescription;
 
@@ -45,6 +47,9 @@ MixdownPluginGenerator.prototype.app = function app() {
   packageJSON.description = this.pluginDescription;
   this.write('package.json', JSON.stringify(packageJSON, null, 2));
   this.copy('_index.js', 'index.js');
+
+  this.mkdir('test');
+  this.directory('test', 'test');
 };
 
 MixdownPluginGenerator.prototype.projectfiles = function projectfiles() {
