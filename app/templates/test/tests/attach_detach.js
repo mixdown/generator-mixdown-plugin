@@ -8,7 +8,7 @@ suite('Attach/Detach', function() {
   setup(function(done) {
 
     // create plugin
-    var p = new YourPlugin('foo', {
+    var p = new YourPlugin({
 
       // *******************************
       // TODO: put your config here.
@@ -17,7 +17,7 @@ suite('Attach/Detach', function() {
     });
 
     // attach it
-    app.use(p);
+    app.use(p, 'foo');
 
     app.init(done);
   });
