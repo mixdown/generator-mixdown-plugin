@@ -2,7 +2,7 @@ var BasePlugin = require('mixdown-app').Plugin;
 
 // Create a new plugin from the base plugin class.
 // this._options is the options hash that was passed on init.
-var HelloPlugin = BasePlugin.extend({
+module.exports = BasePlugin.extend({
 
   // Any function that does not start with _ will be attached.
   // do not use init() as it is reserved in the Resign Simple Inheritance pattern
@@ -27,5 +27,3 @@ var HelloPlugin = BasePlugin.extend({
     done();
   }
 });
-
-module.exports = HelloPlugin;

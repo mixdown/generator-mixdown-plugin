@@ -19,7 +19,7 @@ suite('Attach/Detach', function() {
     // attach it
     app.use(p, 'foo');
 
-    app.init(done);
+    app.setup(done);
   });
 
   test('Attach & Detach', function(done) {
